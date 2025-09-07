@@ -22,7 +22,7 @@ const port = process.env.PORT || 3000;
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   // SSL issue आये तो नीचे वाला uncomment करो:
-  // ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false },
 });
 
 app.use(bodyParser.json());
@@ -59,6 +59,7 @@ app.get("/api/get", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
 
 
 
