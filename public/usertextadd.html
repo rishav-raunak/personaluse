@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>content add</title>
+
+   
+</head>
+<body>
+
+    <div class="main_container">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"> <img src="logo.png" alt=""></a>
+            </div>
+            <div class="logo-name">
+                <h2>Personal</h2>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <section>
+
+        <label for="message">Your Message:</label>
+        <form class="add_page" id="addForm">
+           
+            <div class="textcontainer">
+                
+                <textarea name="textarea" id="message" placeholder="Enter your text"></textarea>
+            </div>
+    
+
+            <div class="submit_text">
+            
+                <button  type="submit">Submit</button>
+            </div>
+           
+
+        </form>
+    </section>
+     <a href="index.html" class="backbutton">Back</a>
+
+    <script>
+        document.getElementById("addForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+           const content = document.getElementById("message").value;
+
+            const res = await fetch("/api/add", {
+                method :"POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content}),
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                alert("Card Added!");
+                window.location.href = "index.html";
+            } else {
+                alert("Error: " + data.error);
+                
+            }
+        });
+    </script>
+    
+</body>
+</html>
