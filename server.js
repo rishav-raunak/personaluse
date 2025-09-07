@@ -10,12 +10,19 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // PostgreSQL connection
+// const pool = new Pool({
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   host: process.env.DB_HOST,
+//   port: process.env.DB_PORT,
+//   database: process.env.DB_NAME,
+// });
+
+
 const pool = new Pool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
+  connectionString: process.env.DATABASE_URL,
+  // SSL issue आये तो नीचे वाला uncomment करो:
+  // ssl: { rejectUnauthorized: false },
 });
 
 app.use(bodyParser.json());
@@ -52,6 +59,7 @@ app.get("/api/get", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
 
 
 
